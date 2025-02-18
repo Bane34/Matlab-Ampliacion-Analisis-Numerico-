@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+
+% Paquetes usuales
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6.5in, 10in}]{geometry}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{bm}
+\usepackage{enumitem}
+
+% Mis comandos
+\newcommand{\RR}{\rm I\!R}
+\newcommand{\NN}{{\rm I\!N}}
+\newcommand{\CC}{$\mathds{C}$}
+\newcommand{\QQ}{${\mathds{Q}}$}
+\newcommand{\KK}{{\rm I\!K}}
+\newcommand{\ZZ}{$\mathds{Z}$}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+	
+% Entornos
+\theoremstyle{definition}
+\newtheorem{theorem}[subsection]{Teorema}
+\newtheorem{proposition}[subsection]{Proposición}
+\newtheorem{lemma}[subsection]{Lema}
+\newtheorem{corollary}[subsection]{Corolario}
+\newtheorem{observation}[subsection]{Observación}
+
+\newenvironment{ejemplo}{\noindent\textbf{Ejemplo: }}{}
+\newenvironment{demostracion}{\noindent\textit{Demostración: } $ $ \newline}{\newline\qed}
+
+\title{\textbf{Cuestiones práctica 1\\ {\small Ampliación de análisis numérico}}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage 
+\noindent\textbf{Cuestión 3:}
+
+Del programa \texttt{practica1.m} obtenemos la siguiente tabla
+{\Large \begin{center}
+		\begin{tabular}{ | c | c | c | c |}
+			\hline
+			$\norm{\cdot}_1$ & $\norm{\cdot}_2$ & $\norm{\cdot}_\infty$ & $\norm{\cdot}_F$ \\
+			\hline\hline
+			2.5000e-01 & 2.4884e-01 & 2.5000e-01 & 1.7370e-01 \\
+			2.5000e-01 & 2.4971e-01 & 2.5000e-01 & 1.7527e-01 \\
+			2.5000e-01 & 2.4993e-01 & 2.5000e-01 & 1.7603e-01 \\
+			2.5000e-01 & 2.4998e-01 & 2.5000e-01 & 1.7641e-01 \\
+			2.5000e-01 & 2.5000e-01 & 2.5000e-01 & 1.7659e-01 \\
+			2.5000e-01 & 2.5000e-01 & 2.5000e-01 & 1.7668e-01 \\
+			\hline
+		\end{tabular}
+\end{center}}
+Observamos entonces que las tres primeras normas se multiplican por $0.25$ y la de Frobenius por $0.176$. \\
+\newline 
+\noindent\textbf{Cuestión 4:} En primer lugar, fijado un $N\in\NN$ y un intervalo $[a,b]$, la matriz $DD_{N-1}$ es de la forma
+$$DD_{N-1} = \frac{N^2}{(b-a)^2}\begin{bmatrix}
+	-2 & 1 & 0 & \dots & \dots & 0 \\
+	1 & -2  & 1 & \dots  & \dots  & 0 \\
+	0 & 1 & -2 & \dots & \dots & \vdots \\
+	\vdots  & \vdots & \vdots & \ddots & \dots & \vdots \\
+	\vdots & \vdots & \vdots & \vdots & -2 & 1 \\
+	0 & 0 & \dots & \dots & 1 & -2 
+\end{bmatrix}$$
+Si consideramos las normas matriciales $\norm{\cdot}_\infty$ y $\norm{\cdot}_F$ con
+$$\norm{A}_\infty = \max_{j = 1,\dots, N - 1}\sum_{k=1}^{N-1}\abs{a_{jk}} \quad \quad \text{y} \quad \quad \norm{A}_F = \left[\sum_{i,j=1}^{N-1}\abs{a_{ij}}^2\right]^{\frac{1}{2}}$$
+Para calcular las dos normas de la matriz se tiene en cuenta de que la primera y la segunda columna solo tienen los dos elementos y las $N - 3$ restantes 3 elementos. Así
+$$\norm{DD_{N-1}} = \frac{4 N^2}{(b - a)^2}\quad \quad \text{y} \quad \quad \norm{DD_{N-1}}_F = \frac{N^2}{(b-a)^2}\sqrt{10 + 6(N - 3)}$$
+luego
+\begin{align*}
+	\lim_{N\to\infty}\frac{\norm{DD_{2N-1}}_\infty}{\norm{DD_{N-1}}_\infty} &= \frac{\frac{4 (2 N)^2}{(b-a)^2}}{\frac{4 N^2}{(b-a)^2}} = 4 \\
+	\lim_{N\to\infty}\frac{\norm{DD_{2N-1}}_F}{\norm{DD_{N-1}}_F} &= \frac{16 N^2}{4N^2}\frac{\sqrt{10 + 6(2N - 3)}}{\sqrt{10 + 6(N - 3)}} = \left[\begin{matrix}
+		10 + 6(N - 3) \sim_\infty 6N \\
+		10 + 6(2N - 3) \sim_\infty 12N
+	\end{matrix}\right]  \\
+	&= \lim_{N\to\infty} 4 \sqrt{\frac{12 N }{6 N}} = 4 \sqrt{2}.
+\end{align*}
+\end{document}

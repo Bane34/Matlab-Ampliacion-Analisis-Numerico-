@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+ q\documentclass[12pt]{article}
 
 % Paquetes usuales
 \usepackage[spanish]{babel}
@@ -73,7 +73,7 @@ $$DD_{N-1} = \frac{N^2}{(b-a)^2}\begin{bmatrix}
 Si consideramos las normas matriciales $\norm{\cdot}_\infty$ y $\norm{\cdot}_F$ con
 $$\norm{A}_\infty = \max_{j = 1,\dots, N - 1}\sum_{k=1}^{N-1}\abs{a_{jk}} \quad \quad \text{y} \quad \quad \norm{A}_F = \left[\sum_{i,j=1}^{N-1}\abs{a_{ij}}^2\right]^{\frac{1}{2}}$$
 Para calcular las dos normas de la matriz se tiene en cuenta de que la primera y la segunda columna solo tienen los dos elementos y las $N - 3$ restantes 3 elementos. Así
-$$\norm{DD_{N-1}} = \frac{4 N^2}{(b - a)^2}\quad \quad \text{y} \quad \quad \norm{DD_{N-1}}_F = \frac{N^2}{(b-a)^2}\sqrt{10 + 6(N - 3)}$$
+$$\norm{DD_{N-1}}_\infty = \frac{4 N^2}{(b - a)^2}\quad \quad \text{y} \quad \quad \norm{DD_{N-1}}_F = \frac{N^2}{(b-a)^2}\sqrt{10 + 6(N - 3)}$$
 luego
 \begin{align*}
 	\lim_{N\to\infty}\frac{\norm{DD_{2N-1}}_\infty}{\norm{DD_{N-1}}_\infty} &= \frac{\frac{4 (2 N)^2}{(b-a)^2}}{\frac{4 N^2}{(b-a)^2}} = 4 \\

@@ -1,4 +1,4 @@
-function [] = practica1
+function [tabla_dim_err] = practica1
     % Practica 1 a completar
     format short e
 
@@ -100,10 +100,10 @@ function [] = practica1
 
         % Tabla que muestre el crecimiento de dichas normas con la dimension
         disp('Tabla con el crecimiento de las normas con la dimensión');
-        tabla_crec_norm = [norma1(1 : numrep - 1) ./ norma1(2 : numrep), ...
-                           norma2(1 : numrep - 1) ./ norma2(2 : numrep), ...
-                           normainf(1 : numrep - 1) ./ normainf(2 : numrep), ...
-                           normafro(1 : numrep - 1) ./ normafro(2 : numrep)];
+        tabla_crec_norm = [norma1(2 : numrep) ./ norma1(1 : numrep - 1), ...
+                           norma2(2 : numrep) ./ norma2(1 : numrep - 1), ...
+                           normainf(2 : numrep) ./ normainf(1 : numrep - 1), ...
+                           normafro(2 : numrep) ./ normafro(1 : numrep - 1)];
         disp(tabla_crec_norm);
 
         % Descomentar el pause para parar y analizar el comportamiento
@@ -172,16 +172,16 @@ end
 % Programa auxiliar con la función a analizar
 function f = mifuncion(x)
     % Poner la función que se desee analizar (Ej.: (x^2-4)(x^2+1))
-    f=(x.^2-4).*(x.^2+1);
+    %f = (x.^2 - 4) .* (x.^2 + 1);
     % Comentar la anterior y poner otra según se solicite 
-    % f = exp(- x.^2);
+    f = exp(- x.^2);
 end
 
 % Programa auxiliar con la derivada segunda exacta de la función a analizar
 function f = dersegex(x)
     % Poner la derivada segunda exacta de la función que se desee analizar (Ej.: ((x^2-4)(x^2+1))'' )
-    f = 12 * (x.^2) - 6;
+    %f = 12 * (x.^2) - 6;
     % Comentar la anterior y poner otra función según se solicite
-    % f = (4 * x.^2 - 2) * exp(-x.^2);
-end
+    f = (4 * x.^2 - 2) .* exp(-x.^2);
+end 
 

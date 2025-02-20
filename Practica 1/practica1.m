@@ -32,6 +32,7 @@ function [tabla_dim_err] = practica1
 
         % Se aproxima la derivada segunda mediante la fórmula y un método matricial
         [x, fdotdot, DD] = derivadasegunda(@mifuncion, a, b, dimen(i, 1));
+        length(fdotdot)
             
         % Se aproxima la derivada segunda mediante la fórmula punto a punto
         [xcompar, fdotdotbis] = derivadasegundabis(@mifuncion, a, b, dimen(i, 1));
@@ -116,7 +117,7 @@ function [tabla_dim_err] = practica1
         % Completar las etiquetas de los ejes y leyenda adecuadamente
         xlabel('N');
         ylabel('Valores de las normas matriciales');
-        legend('Norma 1', 'Norma 2', 'Norma 3', 'Norma de Frobenius');  
+        legend('Norma 1', 'Norma 2', 'Norma infinito', 'Norma de Frobenius');  
 end
 
 % Programas auxiliares 
@@ -172,16 +173,16 @@ end
 % Programa auxiliar con la función a analizar
 function f = mifuncion(x)
     % Poner la función que se desee analizar (Ej.: (x^2-4)(x^2+1))
-    %f = (x.^2 - 4) .* (x.^2 + 1);
+    f = (x.^2 - 4) .* (x.^2 + 1);
     % Comentar la anterior y poner otra según se solicite 
-    f = exp(- x.^2);
+    %f = exp(- x.^2);
 end
 
 % Programa auxiliar con la derivada segunda exacta de la función a analizar
 function f = dersegex(x)
     % Poner la derivada segunda exacta de la función que se desee analizar (Ej.: ((x^2-4)(x^2+1))'' )
-    %f = 12 * (x.^2) - 6;
+    f = 12 * (x.^2) - 6;
     % Comentar la anterior y poner otra función según se solicite
-    f = (4 * x.^2 - 2) .* exp(-x.^2);
+    %f = (4 * x.^2 - 2) .* exp(-x.^2);
 end 
 

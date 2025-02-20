@@ -1,4 +1,4 @@
- q\documentclass[12pt]{article}
+\documentclass[12pt]{article}
 
 % Paquetes usuales
 \usepackage[spanish]{babel}
@@ -40,12 +40,51 @@
 
 \begin{document}
 \maketitle
+\noindent 
+\textbf{Cuestión 1:} Consideramos la función $f(x) = (x^2 - 4)(x^2 + 1)$, queremos aproximar $f''$ en el intervalo $[-2,2]$ con la fórmula 
+$$f''(x) \approx \frac{f(x - h) -2 f(x) + f(x + h)}{h^2} \quad h>0, x\in [a,b]$$
+Veamos como es el error en la aproximación. Pongamos
+\begin{equation}\tag{$\ast$}\label{form:err}
+	\mathcal{E}(f) := f''(x^*) - \frac{f(x^* - h) -2 f(x^*) + f(x^* + h)}{h^2}
+\end{equation}
+y para cada $x^*\in [-2, 2]$ desarrollamos $f$ en serie de Taylor en $x^*$:
+$$f(x^* \pm h) = f(x^*) \pm h f'(x^*) + \frac{h^2}{2}f''(x^*) \pm \frac{h^3}{6}f^{(iii)}(x^*) + \frac{h^4}{24}f^{(iv)}(\vartheta_\pm)$$
+con $\vartheta_- \in (x^* - h, x^*)$ y $\vartheta_+ \in (x^*, x^* + h)$. Substituyendo en $\eqref{form:err}$
 
-\newpage 
+\begin{align*}
+	\mathcal{E}(f) &= f''(x^*) - \frac{h^2f''(x^*) + \frac{h^4}{24}f^{(iv)}(\vartheta_-) + \frac{h^4}{24}f^{(iv)}(\vartheta_+)}{h^2} = -\frac{h^4}{24}f^{(iv)}(\vartheta_-) - \frac{h^4}{24}f^{(iv)}(\vartheta_+)
+\end{align*}
+y como $f^{(iv)}(x)=24$ entonces $\mathcal{E}(f) = -\frac{h^2}{12}24 = -2h^2$. Ahora bien, para cada $N\in\NN$ $h^2 = 16 /N^2$ de donde deducimos que 
+$$\boxed{\mathcal{E}(f) = -\frac{32}{N^2}}$$
+
+\noindent Ahora bien, en el programa optenemos los siguientes datos
+\begin{center}
+	\begin{tabular}{ ||c | c | c | c ||}
+		\hline
+		N & $\norm{\cdot}_1$ & $\norm{\cdot}_2$ & $\norm{\cdot}_\infty$ \\
+		\hline\hline
+		128 & 1.9984e+00 & 2.8273e+00 & 3.9998e+00 \\
+		\hline
+	\end{tabular}
+\end{center}
+Llamemos $\bm{\varepsilon}_N$ al vector que guarda el error del método en la iteración $N$ entonces conjeturamos que 
+$$\frac{\norm{\bm{\varepsilon}_N}_1}{\norm{\bm{\varepsilon}_{2N}}_1} \stackrel{N\to\infty}{\longrightarrow} 2, \quad \frac{\norm{\bm{\varepsilon}_N}_2}{\norm{\bm{\varepsilon}_{2N}}_2} \stackrel{N\to\infty}{\longrightarrow} 2 \sqrt{2}\quad \text{y}\quad \frac{\norm{\bm{\varepsilon}_N}_\infty}{\norm{\bm{\varepsilon}_{2N}}_\infty} \stackrel{N\to\infty}{\longrightarrow}4$$
+En efecto, si $\bm{\varepsilon}_N = (\varepsilon_1, \dots, \varepsilon_{N-1}) = (-32/N^2, \dots, -32/N^2)$ y por tanto
+\begin{itemize}
+	\item $\displaystyle \norm{\bm{\varepsilon}_N}_1 = \sum_{k=1}^{N-1}\frac{32}{N^2} = 32 \frac{N-1}{N^2}$
+	\item $\displaystyle \norm{\bm{\varepsilon}_N}_2 = \sqrt{\sum_{k=1}^{N-1}\left(\frac{32}{N^2}\right)^2} = \frac{32}{N^2} \sqrt{N-1}$
+	\item $\displaystyle \norm{\bm{\varepsilon}_N}_\infty = \frac{32}{N^2}$
+\end{itemize}
+Luego haciendo los cocientes al duplicar $N$:
+
+\begin{itemize}
+	\item $\displaystyle \frac{\norm{\bm{\varepsilon}_N}_1}{\norm{\bm{\varepsilon}_{2N}}_1} = \frac{4N^2}{N^2}\frac{N-1}{2N-1} = 2\frac{N-1}{N - 1/2} \longrightarrow 2$
+	\item $\displaystyle \frac{\norm{\bm{\varepsilon}_N}_2}{\norm{\bm{\varepsilon}_{2N}}_2} = 4\sqrt{\frac{N-1}{2N-1}} = 2\sqrt{2 \frac{N-1}{N - 1/2}} \longrightarrow 2\sqrt{2}$
+	\item $\displaystyle \frac{\norm{\bm{\varepsilon}_N}_\infty}{\norm{\bm{\varepsilon}_{2N}}_\infty} = \frac{32 / N^2}{32 / 4N^2} = 4$
+\end{itemize}
 \noindent\textbf{Cuestión 3:}
-
 Del programa \texttt{practica1.m} obtenemos la siguiente tabla
-{\Large \begin{center}
+{ \begin{center}
 		\begin{tabular}{ | c | c | c | c |}
 			\hline
 			$\norm{\cdot}_1$ & $\norm{\cdot}_2$ & $\norm{\cdot}_\infty$ & $\norm{\cdot}_F$ \\

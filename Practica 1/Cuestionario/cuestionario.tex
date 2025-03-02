@@ -13,10 +13,15 @@
 \usepackage{bm}
 \usepackage{enumitem}
 
+\usepackage{mdframed}
+\usepackage{lipsum}
+
+\newmdtheoremenv{lema}{Lema}
+
 % Mis comandos
 \newcommand{\RR}{\rm I\!R}
 \newcommand{\NN}{{\rm I\!N}}
-\newcommand{\CC}{$\mathds{C}$}
+\newcommand{\CC}{\mathds{C}}
 \newcommand{\QQ}{${\mathds{Q}}$}
 \newcommand{\KK}{{\rm I\!K}}
 \newcommand{\ZZ}{$\mathds{Z}$}
@@ -37,6 +42,7 @@
 
 \title{\textbf{Cuestiones práctica 1\\ {\small Ampliación de análisis numérico}}}
 \date{}
+\author{}
 
 \begin{document}
 \maketitle
@@ -80,25 +86,32 @@ Luego haciendo los cocientes al duplicar $N$:
 \begin{itemize}
 	\item $\displaystyle \frac{\norm{\bm{\varepsilon}_N}_1}{\norm{\bm{\varepsilon}_{2N}}_1} = \frac{4N^2}{N^2}\frac{N-1}{2N-1} = 2\frac{N-1}{N - 1/2} \longrightarrow 2$
 	\item $\displaystyle \frac{\norm{\bm{\varepsilon}_N}_2}{\norm{\bm{\varepsilon}_{2N}}_2} = 4\sqrt{\frac{N-1}{2N-1}} = 2\sqrt{2 \frac{N-1}{N - 1/2}} \longrightarrow 2\sqrt{2}$
-	\item $\displaystyle \frac{\norm{\bm{\varepsilon}_N}_\infty}{\norm{\bm{\varepsilon}_{2N}}_\infty} = \frac{32 / N^2}{32 / 4N^2} = 4$
+	\item $\displaystyle \frac{\norm{\bm{\varepsilon}_N}_\infty}{\norm{\bm{\varepsilon}_{2N}}_\infty} = \frac{32 / N^2}{32 / 4N^2} = 4$\\
+	
 \end{itemize}
+
+\noindent\textbf{Cuestión 2:} En la primera gráfica observamos que la razón del error cometido en norma 1 y en norma infinito es mucho mas grande que el cociente entre los errores en norma 1 y norma 2 y en norma 2 y norma infinito. No solo eso, con forme se duplica $N$ este cociente crece mucho más que los mencionados anteriormente. Tenemos que 
+$$\frac{\norm{\cdot}_1}{\norm{\cdot}_2} \leq \sqrt{N},\quad\quad \frac{\norm{\cdot}_2}{\norm{\cdot}_\infty} \leq \sqrt{N} \quad\text{y}\quad \frac{\norm{\cdot}_1}{\norm{\cdot}_\infty} \leq N $$
+luego conforme se duplica $N$ el cociente de la norma 1 y la infinito puede crecer mucho más que los otros pues $\sqrt{N} / N \stackrel{N\to\infty}{\longrightarrow} 0$. Para este problema es mejor considerar la norma infinito ya que muestra como la aproximación es buena y da errores mas bajos que las otras normas. \\
+
+
 \noindent\textbf{Cuestión 3:}
 Del programa \texttt{practica1.m} obtenemos la siguiente tabla
 { \begin{center}
-		\begin{tabular}{ | c | c | c | c |}
+		\begin{tabular}{ || c | c | c | c || }
 			\hline
 			$\norm{\cdot}_1$ & $\norm{\cdot}_2$ & $\norm{\cdot}_\infty$ & $\norm{\cdot}_F$ \\
 			\hline\hline
-			2.5000e-01 & 2.4884e-01 & 2.5000e-01 & 1.7370e-01 \\
-			2.5000e-01 & 2.4971e-01 & 2.5000e-01 & 1.7527e-01 \\
-			2.5000e-01 & 2.4993e-01 & 2.5000e-01 & 1.7603e-01 \\
-			2.5000e-01 & 2.4998e-01 & 2.5000e-01 & 1.7641e-01 \\
-			2.5000e-01 & 2.5000e-01 & 2.5000e-01 & 1.7659e-01 \\
-			2.5000e-01 & 2.5000e-01 & 2.5000e-01 & 1.7668e-01 \\
+			4.0000e+00 & 4.0186e+00 & 4.0000e+00 & 5.7570e+00 \\
+			4.0000e+00 & 4.0046e+00 & 4.0000e+00 & 5.7054e+00 \\
+			4.0000e+00 & 4.0012e+00 & 4.0000e+00 & 5.6808e+00 \\
+			4.0000e+00 & 4.0003e+00 & 4.0000e+00 & 5.6687e+00 \\
+			4.0000e+00 & 4.0001e+00 & 4.0000e+00 & 5.6628e+00 \\
+			4.0000e+00 & 4.0000e+00 & 4.0000e+00 & 5.6598e+00 \\
 			\hline
 		\end{tabular}
 \end{center}}
-Observamos entonces que las tres primeras normas se multiplican por $0.25$ y la de Frobenius por $0.176$. \\
+Observamos entonces que las tres primeras normas se multiplican por $4.00$ y la de Frobenius por $4\sqrt{2}$. \\
 \newline 
 \noindent\textbf{Cuestión 4:} En primer lugar, fijado un $N\in\NN$ y un intervalo $[a,b]$, la matriz $DD_{N-1}$ es de la forma
 $$DD_{N-1} = \frac{N^2}{(b-a)^2}\begin{bmatrix}
@@ -122,4 +135,28 @@ luego
 	\end{matrix}\right]  \\
 	&= \lim_{N\to\infty} 4 \sqrt{\frac{12 N }{6 N}} = 4 \sqrt{2}.
 \end{align*}
+
+\noindent\textbf{Cuestión 5:} La segunda gráfica nos muestra como la norma de es más grande que las otras normas y crece más rápido que estas al duplicar $N$. La norma 1 y la norma infinito producen el mismo resultado pues al ser la matriz simétrica ambas normas coinciden.\\
+
+\begin{lema}
+	Consideremos la norma de Frobenius $\norm{\cdot}_F$ dada para cada $A\in\mathcal{M}_{n,n} $ $(n>1)$ por
+	$$\norm{A}_F = \left[\sum_{i,j=1}^{n}\abs{a_{ij}}^2\right]^{\frac{1}{2}}.$$
+	Entonces $\norm{\cdot}_F$ no es una norma derivada de una normal vectorial.
+\end{lema}
+\begin{demostracion}
+	Si suponemos que $\norm{\cdot}_F$ es una norma derivada de una vectorial, entonces para la matriz identidad $I_n\in\mathcal{M}_{n,n}$ se ha de cumplir que $\norm{I_n}_F = 1$ lo cual es falso pues $\norm{I_n}_F = \sqrt{n}$
+\end{demostracion}
+
+\begin{lema}
+	Si tenemos dos normas vectoriales $\norm{\cdot}_\ast$, $\norm{\cdot}_{\ast\ast}$ que son equivalentes i.e. existen $C, C'>0$ tal que $C'\norm{\cdot}_{\ast\ast}  \leq \norm{\cdot}_{\ast} \leq C \norm{\cdot}_{\ast\ast}$ entonces las correspondientes normas matriciales asociadas también son equivalentes.
+\end{lema}
+
+\begin{demostracion}
+	Sea $A\in\mathcal{M}_{n,n}$ y $\bm{x}\in{\CC}^n\setminus\{\bm{0}\}$ entonces claramente
+	$$\frac{C'}{C}\frac{\norm{A\bm{x}}_{\ast\ast}}{\norm{\bm{x}}_{\ast\ast}} \leq \frac{\norm{A \bm{x}}_\ast}{\norm{\bm{x}}_\ast} \leq \frac{C}{C'}\frac{\norm{A\bm{x}}_{\ast\ast}}{\norm{\bm{x}}_{\ast\ast}}.$$
+	Tomando máximos deducimos la equivalencia de las normas matriciales derivadas.
+\end{demostracion}
+
+\noindent\textbf{Cuestión 6:} Para la función $f(x) = (x^2 - 4)(x^2 + 1)$ el error cometido en norma 2 para $N=128$ es de 6.9850e-04 luego si produce una aproximación correcta. Sin embargo si lo comparamos para el mismo $N$ y la función $g(x) = e^{-x^2}$ observamos que el error cometido de nuevo en norma 2 es de 2.6524e+03 el cual es significativamente mayor que el de la primera función. En la hipótesis del problema se asume que la función se anula en los extremos del intervalo donde realizamos la aproximación y $g$ no cumple este criterio luego los valores en los extremos empeoran el resultado. 
+
 \end{document}

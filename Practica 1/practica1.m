@@ -1,4 +1,4 @@
-function [tabla_dim_err] = practica1
+function [] = practica1
     % Practica 1 a completar
     format short e
 
@@ -32,8 +32,7 @@ function [tabla_dim_err] = practica1
 
         % Se aproxima la derivada segunda mediante la fórmula y un método matricial
         [x, fdotdot, DD] = derivadasegunda(@mifuncion, a, b, dimen(i, 1));
-        length(fdotdot)
-            
+
         % Se aproxima la derivada segunda mediante la fórmula punto a punto
         [xcompar, fdotdotbis] = derivadasegundabis(@mifuncion, a, b, dimen(i, 1));
 
@@ -89,13 +88,13 @@ function [tabla_dim_err] = practica1
         % Completar las etiquetas de los ejes y la leyenda adecuadamente
         xlabel('N');
         ylabel('Errores');
-        legend('Error en norma 1', 'Error en norma 2', 'Error en norma 3');
+        legend('Error norma 1 / norma 2', 'Error norma 2 / norma inf', 'Error norma 1 / norma inf');
 
-        disp('----------------------------------------<o>----------------------------------------')
+        disp('>----------------------------------------<o>----------------------------------------<')
 
     %%% Figura 2 %%%
         % Tabla con la primea columna dimen y las normas de las matrices de derivacion
-        disp('Tabla con las distintas normas matriciales')
+        disp('Norma 1, 2, infinito y de frobenius de la matriz DD respectivamente')
         tabla_norm_mat = [dimen norma1 norma2 normainf normafro];
         disp(tabla_norm_mat);
 
@@ -143,7 +142,7 @@ function [x, fdotdot, DD] = derivadasegunda(fun, a, b, N)
     fdotdot = DD * fun(x);
 end
 
-function [xcompar,fdotdotbis] = derivadasegundabis(fun, a, b, N)
+function [xcompar, fdotdotbis] = derivadasegundabis(fun, a, b, N)
 
     % Programa que calcula la aproximación central a la derivada segunda
     % con la fórmula elemento a elemento

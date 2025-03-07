@@ -55,7 +55,7 @@ for ii = 1 : Nexp
         
         x = rand(n, 1);
         b = A * x;
-        delta_b = 10e-3 * rand(n, 1) ;
+        delta_b = 1.0e-3 * rand(n, 1) ;
         delta_x = (A \ (delta_b + b));
         delta_x = delta_x - x;
 

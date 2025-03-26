@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+
+% Paquetes usuales
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6.5in, 10in}]{geometry}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{bm}
+\usepackage{enumitem}
+
+\usepackage{mdframed}
+\usepackage{lipsum}
+
+\newmdtheoremenv{lema}{Lema}
+
+% Mis comandos
+\newcommand{\RR}{\rm I\!R}
+\newcommand{\NN}{{\rm I\!N}}
+\newcommand{\CC}{\mathds{C}}
+\newcommand{\QQ}{${\mathds{Q}}$}
+\newcommand{\KK}{{\rm I\!K}}
+\newcommand{\ZZ}{$\mathds{Z}$}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+
+% Entornos
+\theoremstyle{definition}
+\newtheorem{theorem}[subsection]{Teorema}
+\newtheorem{proposition}[subsection]{Proposición}
+\newtheorem{lemma}[subsection]{Lema}
+\newtheorem{corollary}[subsection]{Corolario}
+\newtheorem{observation}[subsection]{Observación}
+
+\newenvironment{ejemplo}{\noindent\textbf{Ejemplo: }}{}
+\newenvironment{demostracion}{\noindent\textit{Demostración: } $ $ \newline}{\newline\qed}
+
+\title{\textbf{Cuestiones práctica 4a\\ {\small Ampliación de análisis numérico}}}
+\date{}
+\author{}
+
+\begin{document}
+	\maketitle
+	\noindent
+	\textbf{Cuestión 1:} Dada una matriz $A\in\mathcal{M}_{n,n}(\CC)$ se define su número de condición para una norma $\norm{\,\cdot\,}_p$ por $\mu(A) = \norm{A}_p \norm{A^{-1}}_p$
+\end{document}

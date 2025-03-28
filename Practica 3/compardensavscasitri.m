@@ -21,7 +21,7 @@ function [] = compardensavscasitri
         n
     
         % a,b,c vectores COLUMNA
-        a =  [2 : n + 1]; %diagonal principal (completar)
+        a =  [2 : n + 1]'; %diagonal principal (completar)
         b =  -ones(n - 1, 1); %subdiagonal y superdiagonal (completar)
         c =  -ones(n - 2, 1); % fila inferior (completar)
     
@@ -35,17 +35,17 @@ function [] = compardensavscasitri
     
         % Descomentar/comentar para ver que funciona
         % Dejarlo comentado una vez acabado 
-        A
-        pause
+        %A
+        %pause
 
         % La factorización LDLt con la fórmula tal cual
         tic
-        [L D tiempos memoria] = facLDLtdensa(A);
+        [L, D, tiempos, memoria] = facLDLtdensa(A);
         tiempo1(j) = toc;
        
         % La factorización LDLt afinada a una casitridiagonal
         tic
-        [d, l, u] = facLDLtcasitri(a,b,c);
+        [d, l, u] = facLDLtcasitri(a, b, c);
         tiempo2(j) = toc;
     
         % Se duplica la dimensión y se vuelve a analizar
@@ -53,7 +53,7 @@ function [] = compardensavscasitri
     end
 
 % Representación gráfica (no tocar)
-    loglog(dimen,tiempo1,'ro-',dimen,tiempo2,'b*:')
+    loglog(dimen, tiempo1, 'ro-', dimen, tiempo2, 'b*:')
     legend('mi LDL^T (densa)','mi LDL^T (afinada a tridiagonal)','Location','NorthWest')
     title(['Comparativa de tiempos'])
     xlabel('Dimension de la matriz')
@@ -128,11 +128,11 @@ function [d, l, u] = facLDLtcasitri(a,b,c)
     end
 
     % Última fila, primera columna
-    u(1)= c(1) / d(1);
+    u(1) = c(1) / d(1);
 
     % Última fila, columnas 2 a n-2
     for j = 2 : n - 2
-        u(j) = (c(j) - u(j) * l(j - 1) * d(j - 1)) / d(j);
+        u(j) = (c(j) - u(j - 1) * l(j - 1) * d(j - 1)) / d(j);
     end
 
     % Última fila, últimos dos elementos

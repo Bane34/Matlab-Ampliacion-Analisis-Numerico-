@@ -49,10 +49,20 @@
 \begin{document}
 	\maketitle
 	
-	\noindent\textbf{Cuestión 1:} En la instrucción \texttt{G = chol(A, 'lower')} el parámetro \texttt{'lower'} indica a la función que utilice la parte triangular inferior de la matriz  y la diagonal de $A$ para calcular la factorización de Cholesky. Si realizamos el experimento sin utilizar el parámetro \texttt{'lower'} observamos dos sucesos:
-	\begin{enumerate}
-		\item Si no especificamos que la matriz es dispersa el cálculo de la factorización es más lento sin dicho argumento para $n < 10^2$ aproximadamente pero a partir de aquí los tiempos son prácticamente iguales.
-	\end{enumerate}
+	\noindent\textbf{Cuestión 1:} En la instrucción \texttt{G = chol(A, 'lower')} el parámetro \texttt{'lower'} indica a la función que utilice la parte triangular inferior de la matriz  y la diagonal de $A$ para calcular la factorización de Cholesky. Si $A = R R^t$ al suprimir el parámetro \texttt{'lower'} se obtiene que la matriz $R$ es triangular superior. \\
 
-	\noindent\textbf{Cuestión 2:}
+	\noindent\textbf{Cuestión 2:} Si $n\in\NN$ es la dimensión de la matriz, $\bm{a}\in{\RR}^n$ el vector con la diagonal principal y $\bm{b}\in{\RR}^{n-1}$ el vector con los elementos de la primera subdiagonal principal superior e inferior:
+	\begin{enumerate}
+		\item \texttt{A=spdiags(a,0,n,n)} crea una matriz dispersa de tamaño $n\times n$ con $\bm{a}$ en la diagonal principal.
+		\item \texttt{A=spdiags(b,-1,A)} reemplaza en la matriz $A$ la diagonal inferior a la diagonal principal por el vector $\bm{b}$.
+		\item \texttt{A=spdiags([1 b']', 1, A)} esencialmente hace lo mismo, substituir en $A$ la diagonal superior a la principal por el vector $\bm{b}$.
+	
+	\end{enumerate}
+	
+	La dos últimas instrucciones son diferentes cuando hacen la misma tarea, esto se debe a que la función se ejecuta con argumentos \texttt{spdiags(B,d,A)} con $A$ la matriz donde queremos subsituir las diagonales en las posiciones $\bm{d}\in{\RR}^k$ por las columnas de $B$. Para que los argumentos sean correctos, si $A\in\mathcal{M}_{n, m}(\RR)$, la matriz $B$ tiene que tener dimensión $\min\{n, m\}\times k$ \\
+		
+	\noindent\textbf{Cuestión 3:} Los tiempos obtenidos son muy diferentes, si el programa sabe que las matrices son dispersas el tiempo no sube de los $0.1$ segundos, en el caso contrario para dimensión $n=16384$ los tiempos de la factorización $LU$ y Cholesky son $12.85$ segundos y $4.32$ segundos respectivamente.
+	
+	La variable \textit{nexp} almacena el número de esperimentos a realizar. Cuando $ind\_disp=2$ el número de experimentos es mayor para demostrar que indicando que las matrices son dispersas los algoritmos son mucho más rápidos incluso con matrices más grandes.
+	
 \end{document}

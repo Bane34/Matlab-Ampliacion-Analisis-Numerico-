@@ -76,7 +76,6 @@ for j = 1 : nexp
 
     % La factorización de Cholesky de Matlab
     tic
-    % G = chol(A, 'lower');
     G = chol(A, 'lower');
     tiempo3(j) = toc;
 
@@ -84,6 +83,8 @@ for j = 1 : nexp
     n = n * 2;
 end
 
+    tiempo2
+    tiempo3
 % Representación gráfica (no tocar)
     figure(ind_disp)
     loglog(dimen,tiempo1,'ro-',dimen,tiempo2,'b*:',dimen,tiempo3,'kv--')
